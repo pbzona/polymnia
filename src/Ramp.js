@@ -1,4 +1,5 @@
 const Color = require("./Color")
+const StepGenerator = require('./StepGenerator')
 
 class Ramp {
   constructor(size) {
@@ -31,6 +32,8 @@ class MidpointRamp extends Ramp {
     } else {
       throw new Error('Midpoint must be a Color object')
     }
+
+    this.stepGenerator = new StepGenerator(this.size)
 
     // Todo - control setters for these so that saturation doesn't bottom out before left side of ramp
     // and value doesn't top out before right side
@@ -74,8 +77,8 @@ class MidpointRamp extends Ramp {
 
   // Private methods
   _updateHueSteps() {
-    const shift = this._createLinearShift(this.hueShift)
-    this.hueSteps = this.reverseHueShift ? shift.reverse() : shift
+    this.stepGenerator.createLinearSteps(this.hueShift)
+    this.hueSteps = this.reverseHueShift ? this.stepGenerator.steps.reverse() : this.stepGenerator.steps
   }
 
   _applyHueShift() {
@@ -85,7 +88,8 @@ class MidpointRamp extends Ramp {
   }
 
   _updateSaturationSteps() {
-    this.saturationSteps = this._createCurveShift(this.saturationShift)
+    this.stepGenerator.createCurveSteps(this.saturationShift)
+    this.saturationSteps = this.stepGenerator.steps
   }
   
   _applySaturationShift() {
@@ -95,7 +99,8 @@ class MidpointRamp extends Ramp {
   }
 
   _updateValueSteps() {
-    this.valueSteps = this._createLinearShift(this.valueShift)
+    this.stepGenerator.createLinearSteps(this.valueShift)
+    this.valueSteps = this.stepGenerator.steps
   }
 
   _applyValueShift() {
@@ -110,34 +115,6 @@ class MidpointRamp extends Ramp {
     } else {
       return
     }
-  }
-
-  _createLinearShift(amt) {
-    // Create an increasing shift of values to be applied as the adjustment on each color in this.elements
-    // Shift should start negative and increase to positive, with 0 at the midpoint
-    // For example, size 5 and amt 10 should be [-20, -10, 0, 10, 20]
-    const middleIndex = Math.floor(this.size / 2)
-    let linearShift = []
-
-    for (let i = 0; i < this.size; i++) {
-      linearShift.push(amt * (i - middleIndex))
-    }
-    
-    return linearShift
-  }
-
-  _createCurveShift(amt) {
-    // Create a ramp of values that peaks at the midpoint, then decreases at the same rate
-    // Ramp should be negative on both sides, with 0 the highest point in the middle
-    // For example, size 5 and amt 10 should be [-20, -10, 0, -10, -20]
-    const middleIndex = Math.floor(this.size / 2)
-    let curveShift = []
-
-    for (let i = 0; i < this.size; i++) {
-      curveShift.push(amt * Math.abs(i - middleIndex) * -1)
-    }
-    
-    return curveShift
   }
 }
 

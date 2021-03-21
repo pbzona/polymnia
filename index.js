@@ -2,7 +2,7 @@ const Color = require('./src/Color')
 const { MidpointRamp } = require('./src/Ramp')
 const Exporter = require('./src/Exporter')
 
-const c = new Color('3b944b')
+const c = new Color('296385')
 const r = new MidpointRamp(9, c)
 
 r.hueStepSize = 15
