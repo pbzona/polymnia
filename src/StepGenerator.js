@@ -1,8 +1,12 @@
 class StepGenerator {
   constructor(size) {
-    this.size = size
-    this.middleIndex = Math.floor(size / 2)
-    this.steps = null
+    this._size = size
+    this._middleIndex = Math.floor(size / 2)
+    this._steps = null
+  }
+
+  get steps() {
+    return this._steps
   }
 
   createLinearSteps(amt) {
@@ -11,11 +15,11 @@ class StepGenerator {
     // For example, size 5 and amt 10 should be [-20, -10, 0, 10, 20]
     let linearSteps = []
 
-    for (let i = 0; i < this.size; i++) {
-      linearSteps.push(amt * (i - this.middleIndex))
+    for (let i = 0; i < this._size; i++) {
+      linearSteps.push(amt * (i - this._middleIndex))
     }
     
-    this.steps = linearSteps
+    this._steps = linearSteps
   }
 
   createCurveSteps(amt) {
@@ -24,11 +28,11 @@ class StepGenerator {
     // For example, size 5 and amt 10 should be [-20, -10, 0, -10, -20]
     let curveShift = []
 
-    for (let i = 0; i < this.size; i++) {
-      curveShift.push(amt * Math.abs(i - this.middleIndex) * -1)
+    for (let i = 0; i < this._size; i++) {
+      curveShift.push(amt * Math.abs(i - this._middleIndex) * -1)
     }
     
-    this.steps = curveShift
+    this._steps = curveShift
   }
 }
 
