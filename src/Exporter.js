@@ -3,21 +3,25 @@ const Jimp = require('jimp')
 
 class Exporter {
   constructor(swatchSize, ramp, outFile) {
-    this.swatchSize = swatchSize
-    this.ramp = ramp
-    this.outFile = outFile
+    this._swatchSize = swatchSize
+    this._ramp = ramp
+    this._outFile = outFile
   }
 
-  formatColorData() {
+  exportPNG() {
+    return new Jimp(this._swatchSize * this._ramp.elements.length, this._swatchSize, this._createImage);
+  }
+
+  _formatColorData() {
     // Create first row
     let row = []
     let counter = 1
     let colorIdx = 0
 
-    for (let i of new Array(this.swatchSize * this.ramp.elements.length)) {
-      row.push(`0x${this.ramp.elements[colorIdx].color}FF`)
+    for (let i of new Array(this._swatchSize * this._ramp.elements.length)) {
+      row.push(`0x${this._ramp.elements[colorIdx].color}FF`)
       counter++
-      if (counter > this.swatchSize) {
+      if (counter > this._swatchSize) {
         counter = 1
         colorIdx++
       }
@@ -25,22 +29,18 @@ class Exporter {
 
     // Create all rows
     let data = []
-    for (let j of new Array(this.swatchSize)) {
+    for (let j of new Array(this._swatchSize)) {
       data.push(row)
     }
 
     return data
   }
 
-  exportPNG() {
-    return new Jimp(this.swatchSize * this.ramp.elements.length, this.swatchSize, this.createImage);
-  }
-
   // Must be an arrow function for correct context lookup
-  createImage = (err, image) => {
+  _createImage = (err, image) => {
     if (err) throw err;
 
-    const imageData = this.formatColorData()
+    const imageData = this._formatColorData()
 
     imageData.forEach((row, y) => {
       row.forEach((color, x) => {
@@ -48,7 +48,7 @@ class Exporter {
       });
     });
   
-    image.write(this.outFile, (err) => {
+    image.write(this._outFile, (err) => {
       if (err) throw err;
     });
   }
