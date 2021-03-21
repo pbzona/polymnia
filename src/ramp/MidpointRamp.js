@@ -101,7 +101,7 @@ class MidpointRamp extends Ramp {
     if (midpoint instanceof Color) {
       this.midpoint = midpoint
       for (let i of this._elements) {
-        i.hex = midpoint.color
+        i.color = midpoint.color
       }
     } else {
       throw new Error('Midpoint must be a Color object')

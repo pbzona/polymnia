@@ -11,7 +11,7 @@ r.valueStepSize = 10
 r.reverseHueShift = true
 r.apply()
 
-r.elements.forEach(el => console.log(el.hsv)) // Debug
+r.elements.forEach(el => console.log(el._hsv)) // Debug
 
 const e = new Exporter(32, r, 'output.png')
 e.exportPNG()
