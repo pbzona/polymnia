@@ -18,6 +18,24 @@ class Ramp {
     // Virtual method to be overwritten by subclasses
     return undefined
   }
+
+  applyGlobalHueShift(amt) {
+    this._elements.forEach(color => {
+      color.adjustHue(amt)
+    })
+  }
+
+  applyGlobalSaturationShift(amt) {
+    this._elements.forEach(color => {
+      color.adjustSaturation(amt)
+    })
+  }
+
+  applyGlobalValueShift(amt) {
+    this._elements.forEach(color => {
+      color.adjustValue(amt)
+    })
+  }
 }
 
 module.exports = Ramp
