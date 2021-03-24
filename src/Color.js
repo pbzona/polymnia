@@ -8,7 +8,7 @@ const VALUE_LIMIT = 100
 class Color {
   constructor(hex) {
     // For now, we assume the input color is a hex code (with or without hash sign)
-    this._hex = color
+    this._hex = hex
   
     this._hsv = convert.hex.hsv(this._hex)
     this._hue = this._hsv[0]
