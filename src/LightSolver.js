@@ -32,9 +32,3 @@ class LightSolver {
     return value >= min && value <= max
   }
 }
-
-console.log(Util.getAngularDistance)
-
-const l = new LightSolver(30)
-console.log(l.getDistanceToLight())
-console.log(l.getDistanceToShadow())
