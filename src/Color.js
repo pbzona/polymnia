@@ -21,6 +21,18 @@ class Color {
     this.adjustValue = this._adjustValue.bind(this)
   }
 
+  get hue() {
+    return this._hue
+  }
+
+  get saturation() {
+    return this._saturation
+  }
+
+  get value() {
+    return this._value
+  }
+
   get color() {
     return this._color
   }
@@ -77,6 +89,9 @@ class Color {
     this._hsv = currentHSV
   }
 
+  clone() {
+    return Object.assign(Object.create(Object.getPrototypeOf(this)), this)
+  }
 }
 
 module.exports = Color
