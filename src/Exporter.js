@@ -19,7 +19,7 @@ class Exporter {
     let colorIdx = 0
 
     for (let i of new Array(this._swatchSize * this._ramp.elements.length)) {
-      row.push(`0x${this._ramp.elements[colorIdx].color}FF`)
+      row.push(`0x${this._ramp.elements[colorIdx].hex}FF`)
       counter++
       if (counter > this._swatchSize) {
         counter = 1
