@@ -19,6 +19,7 @@ class Color {
     this.adjustHue = this._adjustHue.bind(this)
     this.adjustSaturation = this._adjustSaturation.bind(this)
     this.adjustValue = this._adjustValue.bind(this)
+    this.getComplement = this._getComplement.bind(this)
   }
 
   get hue() {
@@ -46,7 +47,7 @@ class Color {
     this._onUpdate()
   }
 
-  getComplement() {
+  _getComplement() {
     const complement = new this.constructor(this._color)
     complement.adjustHue(HUE_LIMIT / 2)
     return complement
