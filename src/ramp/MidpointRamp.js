@@ -1,5 +1,5 @@
 const Color = require("../Color")
-const Ramp = require('../Ramp')
+const Ramp = require('./Ramp')
 const StepGenerator = require('../StepGenerator')
 
 class MidpointRamp extends Ramp {

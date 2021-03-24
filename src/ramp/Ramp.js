@@ -1,4 +1,4 @@
-const Color = require('./Color')
+const Color = require('../Color')
 
 class Ramp {
   constructor(size) {
