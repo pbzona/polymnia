@@ -6,11 +6,11 @@ const SATURATION_LIMIT = 100
 const VALUE_LIMIT = 100
 
 class Color {
-  constructor(color) {
+  constructor(hex) {
     // For now, we assume the input color is a hex code (with or without hash sign)
-    this._color = color
+    this._hex = color
   
-    this._hsv = convert.hex.hsv(this._color)
+    this._hsv = convert.hex.hsv(this._hex)
     this._hue = this._hsv[0]
     this._saturation = this._hsv[1]
     this._value = this._hsv[2]
@@ -34,12 +34,12 @@ class Color {
     return this._value
   }
 
-  get color() {
-    return this._color
+  get hex() {
+    return this._hex
   }
 
-  set color(c) {
-    this._color = c
+  set hex(c) {
+    this._hex = c
     this._hsv = convert.hex.hsv(c)
     this._hue = this._hsv[0]
     this._saturation = this._hsv[1]
@@ -48,7 +48,7 @@ class Color {
   }
 
   _getComplement() {
-    const complement = new this.constructor(this._color)
+    const complement = new this.constructor(this._hex)
     complement.adjustHue(HUE_LIMIT / 2)
     return complement
   }
