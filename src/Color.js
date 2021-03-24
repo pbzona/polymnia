@@ -86,7 +86,7 @@ class Color {
 
   _onUpdate() {
     const currentHSV = [this._hue, this._saturation, this._value]
-    this._color = convert.hsv.hex(currentHSV)
+    this._hex = convert.hsv.hex(currentHSV)
     this._hsv = currentHSV
   }
 
