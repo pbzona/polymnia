@@ -1,4 +1,4 @@
-const Color = require('./src/Color')
+const Color = require('./src/color/Color')
 const LinearRamp = require('./src/ramp/LinearRamp')
 const MidpointRamp = require('./src/ramp/MidpointRamp')
 const Exporter = require('./src/Exporter')

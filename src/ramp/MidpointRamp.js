@@ -1,4 +1,4 @@
-const Color = require("../Color")
+const Color = require("../color/Color")
 const Ramp = require('./Ramp')
 const StepGenerator = require('../StepGenerator')
 
