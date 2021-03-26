@@ -47,6 +47,10 @@ class Color {
     this._onUpdate()
   }
 
+  clone() {
+    return new this.constructor(this.hex)
+  }
+
   _getComplement() {
     const complement = new this.constructor(this._hex)
     complement.adjustHue(HUE_LIMIT / 2)
@@ -88,10 +92,6 @@ class Color {
     const currentHSV = [this._hue, this._saturation, this._value]
     this._hex = convert.hsv.hex(currentHSV)
     this._hsv = currentHSV
-  }
-
-  clone() {
-    return Object.assign(Object.create(Object.getPrototypeOf(this)), this)
   }
 }
 
