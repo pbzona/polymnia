@@ -70,7 +70,6 @@ class LinearRamp extends Ramp {
 
       colors.push(nextColor)
     }
-    console.log('UPDATED: ', colors)
 
     for (let [idx, color] of this._elements.entries()) {
       color.hex = colors[idx].hex
