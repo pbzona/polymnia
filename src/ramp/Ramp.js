@@ -19,14 +19,6 @@ class Ramp {
     return undefined
   }
 
-  reset() {
-    // Allows reset of all colors for generation from scratch - avoids harsh contrast
-    // by running #apply multiple times
-    for (let c of this._elements) {
-      c.hex = 'FFFFFF'
-    }
-  }
-
   applyGlobalHueShift(amt) {
     this._elements.forEach(color => {
       color.adjustHue(amt)
