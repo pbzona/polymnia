@@ -34,6 +34,10 @@ class LinearRamp extends Ramp {
     this._interpolate(this._firstColor, this._secondColor)
   }
 
+  clone() {
+    return new this.constructor(this._firstColor, this._secondColor)
+  }
+
   _interpolate(start, end) {
     // Calculate hue steps
     let hueAngle = HueSolver.getOrderedAngularDistance(start.hue, end.hue)
