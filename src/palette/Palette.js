@@ -22,6 +22,24 @@ class Palette {
     }
     this._ramps.push(ramp)
   }
+
+  applyGlobalHueShift(amt) {
+    this._ramps.forEach(ramp => {
+      ramp.applyGlobalHueShift(amt)
+    })
+  }
+
+  applyGlobalSaturationShift(amt) {
+    this._ramps.forEach(ramp => {
+      ramp.applyGlobalSaturationShift(amt)
+    })
+  }
+
+  applyGlobalValueShift(amt) {
+    this._ramps.forEach(ramp => {
+      ramp.applyGlobalValueShift(amt)
+    })
+  }
 }
 
 module.exports = Palette
