@@ -5,6 +5,10 @@ class Palette {
     this._ramps = ramps || []
   }
 
+  get ramps() {
+    return this._ramps
+  }
+
   generateFromSingleRamp(numberOfRamps, hueShift) {
     // If no hueShift is provided, divide color space by number to evenly distribute ramps
     if (!hueShift || typeof hueShift !== 'number') {
