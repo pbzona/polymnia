@@ -19,6 +19,7 @@ class LinearRamp extends Ramp {
   }
 
   set firstColor(val) {
+    this._validateColor(val)
     this._firstColor = val
   }
 
@@ -27,6 +28,7 @@ class LinearRamp extends Ramp {
   }
 
   set secondColor(val) {
+    this._validateColor(val)
     this._secondColor = val
   }
 
