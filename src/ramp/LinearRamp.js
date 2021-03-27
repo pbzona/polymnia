@@ -19,7 +19,7 @@ class LinearRamp extends Ramp {
   }
 
   set firstColor(val) {
-    this._validateColor(val)
+    this._validateColor
     this._firstColor = val
   }
 
@@ -37,6 +37,7 @@ class LinearRamp extends Ramp {
   }
 
   clone() {
+    // No need for reset here - running apply twice does not have the same effect as MidpointRamp
     return new this.constructor(this._firstColor, this._secondColor)
   }
 

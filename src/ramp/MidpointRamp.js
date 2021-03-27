@@ -80,7 +80,9 @@ class MidpointRamp extends Ramp {
   clone() {
     // Manually copy values for now until I figure out how to abstract this
     let clone = new this.constructor(this._size, this._midpoint)
-    clone.size = this._size
+    clone.reset()
+    clone.size = this._size // Necessary to create new StepGenerator
+    clone.midpoint = this._midpoint
     clone.hueStepSize = this._hueStepSize
     clone.saturationStepSize = this._saturationStepSize
     clone.valueStepSize = this._valueStepSize
