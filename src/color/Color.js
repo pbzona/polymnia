@@ -14,12 +14,6 @@ class Color {
     this._hue = this._hsv[0]
     this._saturation = this._hsv[1]
     this._value = this._hsv[2]
-
-    // Bind private methods to `this` to expose
-    this.adjustHue = this._adjustHue.bind(this)
-    this.adjustSaturation = this._adjustSaturation.bind(this)
-    this.adjustValue = this._adjustValue.bind(this)
-    this.getComplement = this._getComplement.bind(this)
   }
 
   get hue() {
@@ -51,13 +45,13 @@ class Color {
     return new this.constructor(this.hex)
   }
 
-  _getComplement() {
+  getComplement() {
     const complement = new this.constructor(this._hex)
     complement.adjustHue(HUE_LIMIT / 2)
     return complement
   }
 
-  _adjustHue(amt) {
+  adjustHue(amt) {
     this._hue = (this._hue + amt) % HUE_LIMIT
     if (this._hue < 0) {
       this._hue = 360 - Math.abs(this._hue)
@@ -66,7 +60,7 @@ class Color {
     this._onUpdate()
   }
 
-  _adjustSaturation(amt) {
+  adjustSaturation(amt) {
     this._saturation += amt
     if (this._saturation < 0) {
       this._saturation = 0
@@ -77,7 +71,7 @@ class Color {
     this._onUpdate()
   }
 
-  _adjustValue(amt) {
+  adjustValue(amt) {
     this._value += amt
     if (this._value < 0) {
       this._value = 0
