@@ -5,10 +5,10 @@ const Exporter = require('./src/Exporter')
 
 // MidpointRamp example
 const b = new Color('2189cf')
-const m = new MidpointRamp(9, b)
-m.hueStepSize = 15
-m.saturationStepSize = 10
-m.valueStepSize = 10
+const m = new MidpointRamp(5, b)
+m.hueStepSize = 16
+m.saturationStepSize = 15
+m.valueStepSize = 12
 m.reverseHueShift = true
 m.apply()
 
@@ -27,3 +27,13 @@ l.elements.forEach(el => console.log(el._hsv))
 
 const f = new Exporter(32, l, 'output_linear.png')
 f.exportPNG()
+
+// Another MidpointRamp example for testing clone
+const n = m.clone()
+console.log(n)
+n.hueStepSize = 10
+n.applyGlobalHueShift(-50)
+n.apply()
+
+const g = new Exporter(32, n, 'output_clone.png')
+g.exportPNG()
