@@ -1,6 +1,8 @@
+const Ramp = require('../ramp/Ramp')
+
 class Palette {
   constructor(ramps) {
-    this.ramps = ramps || []
+    this._ramps = ramps || []
   }
 
   generateFromSingleRamp(numberOfRamps, hueShift) {
@@ -9,9 +11,17 @@ class Palette {
       hueShift = Math.floor(360 / numberOfRamps)
     }
 
-    // Assume number of ramps is inclusive of the given ramp
-    for (let i of new Array(numberOfRamps - 1)) {
-      
+    // Todo - implement the rest of this
+    // This method should generate n ramps by applying a global hue shift 
+    // to a single ramp and add it to the ramps prop
+  }
+
+  addRamp(ramp) {
+    if (!ramp instanceof Ramp) {
+      throw new Error('Ramp to add must be a Ramp object')
     }
+    this._ramps.push(ramp)
   }
 }
+
+module.exports = Palette
