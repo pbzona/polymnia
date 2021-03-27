@@ -8,6 +8,7 @@ class MidpointRamp extends Ramp {
     
     this._validateSize()
     this._validateMidpoint(midpoint)
+    this._midpoint = midpoint
 
     this._stepGenerator = new StepGenerator(this._size)
 
@@ -29,14 +30,35 @@ class MidpointRamp extends Ramp {
     this._stepGenerator = new StepGenerator(this._size)
   }
 
+  get midpoint() {
+    return this._midpoint
+  }
+
+  set midpoint(val) {
+    this._validateMidpoint(val)
+    this._midpoint = val
+  }
+
+  get hueStepSize() {
+    return this._hueStepSize
+  }
+
   set hueStepSize(val) {
     this._hueStepSize = val
     this._updateHueSteps()
-  } 
+  }
+
+  get saturationStepSize() {
+    return this._hueStepSize
+  }
 
   set saturationStepSize(val) {
     this._saturationStepSize = val
     this._updateSaturationSteps()
+  }
+
+  get valueStepSize() {
+    return this._valueStepSize
   }
 
   set valueStepSize(val) {
@@ -53,6 +75,19 @@ class MidpointRamp extends Ramp {
     this._applyHueShift()
     this._applySaturationShift()
     this._applyValueShift()
+  }
+
+  clone() {
+    // Manually copy values for now until I figure out how to abstract this
+    let clone = new this.constructor(this._size, this._midpoint)
+    clone.size = this._size
+    clone.hueStepSize = this._hueStepSize
+    clone.saturationStepSize = this._saturationStepSize
+    clone.valueStepSize = this._valueStepSize
+    clone.reverseHueShift = this._reverseHueShift
+    clone.apply()
+
+    return clone
   }
 
   // Private methods
@@ -99,7 +134,7 @@ class MidpointRamp extends Ramp {
 
   _validateMidpoint(midpoint) {
     if (midpoint instanceof Color) {
-      this.midpoint = midpoint
+      this._midpoint = midpoint
       for (let i of this._elements) {
         i.hex = midpoint.hex
       }
